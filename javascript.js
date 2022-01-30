@@ -1,20 +1,71 @@
-const playerSelection = "ROCK";
-const computerSelection = computerPlay();
+let playerSelection = promptPlayer().toLowerCase();
+let computerSelection = computerPlay();
+let playerScore = 0
+let computerScore = 0
 
-
+// Randomizes the three array items and then returns.
 function computerPlay() {
-  const options = ["ROCK" , "PAPER" , "SCISSORS"];
-  const randomSelection =  options[Math.floor(Math.random()*options.length)];
+  let options = ["rock" , "paper" , "scissors"];
+  let randomSelection =  options[Math.floor(Math.random() *options.length)];
   return randomSelection;
 }
 
-
-function gameRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) {
-    return "Draw"
-  }
+// Decides the winner from the arguments given
+function playRound(playerSelection, computerSelection) {
+  if (playerSelection === computerSelection){
+    return `Draw`;
+  }  
+  else if (playerSelection === "rock" && computerSelection === "scissors") {
+    playerScore++
+    return `You win, ${playerSelection} beats ${computerSelection}`;
+  }  
+  else if (playerSelection === "paper" && computerSelection === "rock") {
+    playerScore++
+    return `You win, ${playerSelection} beats ${computerSelection}`;
+  } 
+  else if (playerSelection === "scissors" && computerSelection === "paper") {
+    playerScore++
+    return `You win, ${playerSelection} beats ${computerSelection}`;
+  }   
   else {
-    return "You lose!"
+    computerScore++
+    return `You lose, ${computerSelection} beats ${playerSelection}.`
   }
 }
 
+function promptPlayer() {
+  let askPlayer = prompt("Rock, Paper or Scissors?").toLowerCase();
+    return askPlayer;    
+}
+
+console.log(playRound(playerSelection, computerSelection));
+
+function game() {
+  for(let i=0;i<5;i++){
+    let playerSelection = prompt("Pick a move");
+    const computerSelection = computerPlay()
+    console.log(playRound(playerSelection, computerSelection))
+    console.log("your score = " + playerScore);
+    console.log("Computer's score = " + computerScore);
+  }
+}
+
+function scoreBoard() {
+  if (playerScore > computerScore) {
+    return `You won! ${playerScore} - ${computerScore}.`
+  }
+  else if (computerScore > playerScore) {
+    return `You lose. ${playerScore} - ${computerScore}.`  
+  }  
+  else if (playerScore === computerScore) {
+    return `Draw. ${playerScore} - ${computerScore}.`
+  }  
+
+}
+
+game();
+computerPlay();
+computerPlay();
+computerPlay();
+computerPlay();
+console.log(scoreBoard());

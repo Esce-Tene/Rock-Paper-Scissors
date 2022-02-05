@@ -42,7 +42,7 @@ console.log(playRound(playerSelection, computerSelection));
 
 function game() {
   for(let i=0;i<5;i++){
-    let playerSelection = prompt("Pick a move");
+    promptPlayer();
     const computerSelection = computerPlay()
     console.log(playRound(playerSelection, computerSelection))
     console.log("your score = " + playerScore);
@@ -64,8 +64,4 @@ function scoreBoard() {
 }
 
 game();
-computerPlay();
-computerPlay();
-computerPlay();
-computerPlay();
 console.log(scoreBoard());

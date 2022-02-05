@@ -10,7 +10,7 @@ function computerPlay() {
   return randomSelection;
 }
 
-// Decides the winner from the arguments given
+// Cycles through the draw condition, win conditions, or returns a loss and adds score.
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection){
     return `Draw`;

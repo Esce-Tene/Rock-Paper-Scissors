@@ -39,11 +39,11 @@ function playRound(playerSelection) {
     result.textContent =  `You lose, ${computerSelection} beats ${playerSelection}.`
   }
   if (playerScore == 5 && playerScore > computerScore) {
-    result.textContent = "You won!" 
+    result.textContent = `You won! Your ${playerSelection} beats my ${computerSelection}.`
     disableButtons();
   }
   else if (computerScore == 5 && computerScore > playerScore) {
-    result.textContent = "You lost."
+    result.textContent = `You lost. My ${computerSelection} beats your ${playerSelection}.`
     disableButtons();
   }
 }

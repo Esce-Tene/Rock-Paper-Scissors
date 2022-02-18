@@ -1,67 +1,62 @@
-let playerSelection = promptPlayer().toLowerCase();
-let computerSelection = computerPlay();
 let playerScore = 0
 let computerScore = 0
+const buttons = document.querySelectorAll(`button`);
 
-// Randomizes the three array items and then returns.
+
 function computerPlay() {
   let options = ["rock" , "paper" , "scissors"];
   let randomSelection =  options[Math.floor(Math.random() *options.length)];
   return randomSelection;
 }
 
-// Cycles through the draw condition, win conditions, or returns a loss and adds score.
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+  let computerSelection = computerPlay();
+  let result = document.getElementById('results');
+  let pScore = document.getElementById('playerScore');
+  let cScore = document.getElementById('computerScore');
+
   if (playerSelection === computerSelection){
-    return `Draw`;
+    result.textContent = `Draw`
   }  
   else if (playerSelection === "rock" && computerSelection === "scissors") {
     playerScore++
-    return `You win, ${playerSelection} beats ${computerSelection}`;
+    pScore.textContent = `Player: ${playerScore}`;
+    result.textContent = `You win, ${playerSelection} beats ${computerSelection}`;
   }  
   else if (playerSelection === "paper" && computerSelection === "rock") {
     playerScore++
-    return `You win, ${playerSelection} beats ${computerSelection}`;
+    pScore.textContent = `Player: ${playerScore}`;
+    result.textContent = `You win, ${playerSelection} beats ${computerSelection}`;
   } 
   else if (playerSelection === "scissors" && computerSelection === "paper") {
     playerScore++
-    return `You win, ${playerSelection} beats ${computerSelection}`;
-  }   
+    pScore.textContent = `Player: ${playerScore}`;
+    result.textContent = `You win, ${playerSelection} beats ${computerSelection}`;
+  } 
   else {
     computerScore++
-    return `You lose, ${computerSelection} beats ${playerSelection}.`
+    cScore.textContent = `Computer: ${computerScore}`;
+    result.textContent =  `You lose, ${computerSelection} beats ${playerSelection}.`
+  }
+  if (playerScore == 5 && playerScore > computerScore) {
+    result.textContent = "You won!" 
+    disableButtons();
+  }
+  else if (computerScore == 5 && computerScore > playerScore) {
+    result.textContent = "You lost."
+    disableButtons();
   }
 }
 
-function promptPlayer() {
-  let askPlayer = prompt("Rock, Paper or Scissors?").toLowerCase();
-    return askPlayer;    
+function disableButtons() {
+  buttons.forEach(elem => {
+      elem.disabled = true
+  })
 }
+ 
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    playRound(button.value);
+  })
+})
 
-console.log(playRound(playerSelection, computerSelection));
-
-function game() {
-  for(let i=0;i<5;i++){
-    promptPlayer();
-    const computerSelection = computerPlay()
-    console.log(playRound(playerSelection, computerSelection))
-    console.log("your score = " + playerScore);
-    console.log("Computer's score = " + computerScore);
-  }
-}
-
-function scoreBoard() {
-  if (playerScore > computerScore) {
-    return `You won! ${playerScore} - ${computerScore}.`
-  }
-  else if (computerScore > playerScore) {
-    return `You lose. ${playerScore} - ${computerScore}.`  
-  }  
-  else if (playerScore === computerScore) {
-    return `Draw. ${playerScore} - ${computerScore}.`
-  }  
-
-}
-
-game();
-console.log(scoreBoard());
